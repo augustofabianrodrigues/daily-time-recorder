@@ -14,8 +14,8 @@
                 <v-toolbar-title>Cadastro</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-alert :value="!!errorMessage" transition="fade-transition" class="mb-2" type="error">
-                  {{ errorMessage }}
+                <v-alert :value="!!displayError" transition="fade-transition" class="mb-2" type="error">
+                  {{ displayError }}
                 </v-alert>
                 <v-form ref="form" lazy-validation>
                   <v-layout row wrap>
@@ -96,7 +96,10 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
 import MainFooter from '@/components/common/MainFooter'
+
+const { mapState, mapActions, mapMutations } = createNamespacedHelpers('auth')
 
 export default {
   data () {
@@ -135,10 +138,36 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.clearError()
+  },
+  computed: {
+    ...mapState([
+      'error'
+    ]),
+    displayError () {
+      return this.errorMessage || this.error
+    }
+  },
   methods: {
+    ...mapActions([
+      'register'
+    ]),
+    ...mapMutations([
+      'clearError'
+    ]),
     submit () {
       if (this.$refs.form.validate()) {
         this.errorMessage = ''
+        this.register({
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          username: this.username,
+          password: this.password
+        }).then(() => {
+          this.$router.push({'path': '/'})
+        }, error => console.error(error))
       } else {
         this.errorMessage = 'Verifique os campos com erro antes de continuar.'
       }
