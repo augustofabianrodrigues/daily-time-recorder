@@ -5,7 +5,6 @@ export default {
   namespaced: true,
   strict: process.env.NODE_ENV !== 'production',
   state: {
-    error: null,
     expiresIn: null,
     token: auth.getStoredAcessToken(),
     user: auth.getStoredUserInfo()
@@ -20,7 +19,6 @@ export default {
             auth.storeUserInfo(response.data.user)
             resolve()
           }, error => {
-            commit('failedToRegister', error)
             reject(error)
           })
       })
@@ -28,16 +26,9 @@ export default {
   },
   mutations: {
     registered (state, payload) {
-      state.error = null
       state.expiresIn = payload.expires_in
       state.token = payload.access_token
       state.user = payload.user
-    },
-    failedToRegister (state, payload) {
-      state.error = payload.response.data
-    },
-    clearError (state) {
-      state.error = null
     }
   },
   getters: {

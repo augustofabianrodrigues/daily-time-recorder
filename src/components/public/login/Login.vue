@@ -30,12 +30,7 @@
 </template>
 
 <script>
-import MainFooter from '@/components/common/MainFooter'
-
 export default {
-  name: 'Login',
-  components: {
-    MainFooter
-  }
+  name: 'Login'
 }
 </script>

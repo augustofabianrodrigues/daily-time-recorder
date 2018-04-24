@@ -12,8 +12,8 @@
             <v-toolbar-title>Cadastro</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-alert :value="!!displayError" transition="fade-transition" class="mb-2" type="error">
-              {{ displayError }}
+            <v-alert :value="!!error" transition="fade-transition" class="mb-2" type="error">
+              {{ error }}
             </v-alert>
             <register-form ref="form"/>
           </v-card-text>
@@ -32,7 +32,7 @@
 import { createNamespacedHelpers } from 'vuex'
 import RegisterForm from '@/components/public/register/RegisterForm'
 
-const { mapState, mapActions, mapMutations } = createNamespacedHelpers('auth')
+const { mapActions } = createNamespacedHelpers('auth')
 
 export default {
   name: 'Register',
@@ -41,38 +41,24 @@ export default {
   },
   data () {
     return {
-      errorMessage: ''
-    }
-  },
-  mounted () {
-    this.clearError()
-  },
-  computed: {
-    ...mapState([
-      'error'
-    ]),
-    displayError () {
-      return this.errorMessage || this.error
+      error: ''
     }
   },
   methods: {
     ...mapActions([
       'register'
     ]),
-    ...mapMutations([
-      'clearError'
-    ]),
     submit () {
       if (this.$refs.form.validate()) {
-        this.errorMessage = ''
+        this.error = ''
         this.register(this.$refs.form.data())
           .then(() => {
             this.$router.push({'path': '/'})
-          }, error =>
-            console.error(error)
-          )
+          }, error => {
+            this.error = error
+          })
       } else {
-        this.errorMessage = 'Verifique os campos com erro antes de continuar.'
+        this.error = 'Verifique os campos com erro antes de continuar.'
       }
     },
     clear () {

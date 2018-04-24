@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <v-navigation-drawer
       persistent
       :mini-variant="miniVariant"
@@ -39,14 +39,12 @@
     <v-content>
       <router-view/>
     </v-content>
-    <main-footer/>
-  </v-app>
+  </div>
 </template>
 
 <script>
-import MainFooter from '@/components/common/MainFooter'
-
 export default {
+  name: 'Main',
   data () {
     return {
       clipped: false,
@@ -61,10 +59,6 @@ export default {
       rightDrawer: false,
       title: 'Registrador de horas'
     }
-  },
-  name: 'App',
-  components: {
-    MainFooter
   }
 }
 </script>
