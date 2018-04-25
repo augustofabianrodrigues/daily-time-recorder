@@ -1,6 +1,14 @@
 import axios from 'axios'
 import { auth } from '../../utils'
 
+export const mutations = {
+  registered (state, payload) {
+    state.expiresIn = payload.expires_in
+    state.token = payload.access_token
+    state.user = payload.user
+  }
+}
+
 export default {
   namespaced: true,
   strict: process.env.NODE_ENV !== 'production',
@@ -24,13 +32,7 @@ export default {
       })
     }
   },
-  mutations: {
-    registered (state, payload) {
-      state.expiresIn = payload.expires_in
-      state.token = payload.access_token
-      state.user = payload.user
-    }
-  },
+  mutations,
   getters: {
     isLoggedIn (state) {
       return !!state.token
