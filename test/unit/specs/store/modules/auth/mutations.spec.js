@@ -1,4 +1,4 @@
-import { mutations } from '@/store/modules/auth'
+import mutations from '@/store/modules/auth/mutations'
 
 const { registered } = mutations
 

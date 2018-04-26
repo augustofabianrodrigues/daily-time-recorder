@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import Dashboard from '@/components/Dashboard'
 import Public from './public'
-import { auth } from '../utils'
+import auth from '@/utils/auth'
 
 Vue.use(Router)
 
