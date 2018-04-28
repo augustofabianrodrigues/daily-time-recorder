@@ -2,9 +2,9 @@ import mutations from '@/store/modules/auth/mutations'
 
 const { registered } = mutations
 
-describe('auth/mutations', () => {
-  describe('registered', () => {
-    it('adds response info when it doesn\'t exist', () => {
+describe(`/store/modules/auth/mutations`, () => {
+  describe(`registered`, () => {
+    it(`adds response info when it doesn't exist`, () => {
       const state = {
         expiresIn: null,
         token: null,
@@ -23,7 +23,7 @@ describe('auth/mutations', () => {
       expect(state.expiresIn).to.equal(expiresIn)
     })
 
-    it('overwrites response info when it already exists', () => {
+    it(`overwrites response info when it already exists`, () => {
       const state = {
         expiresIn: 3600,
         token: 'token',

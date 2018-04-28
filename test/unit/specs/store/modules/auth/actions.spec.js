@@ -21,20 +21,8 @@ const actions = actionsInjector({
   }
 })
 
-describe('auth/actions', () => {
-  beforeEach(function () {
-    let store = {}
-
-    sinon.stub(localStorage, 'getItem').callsFake(function (key) {
-      return store[key]
-    })
-    sinon.stub(localStorage, 'setItem').callsFake(function (key, value) {
-      store[key] = value + ''
-      return store[key]
-    })
-  })
-
-  it('register', async () => {
+describe(`/store/modules/auth/actions`, () => {
+  it(`register`, async () => {
     const commit = sinon.spy()
     const state = {}
 
@@ -52,7 +40,7 @@ describe('auth/actions', () => {
           firstName: 'foo',
           lastName: 'bar',
           email: 'foo@bar.com',
-          username: 'foobara'
+          username: 'foobar'
         },
         access_token: 'token'
       }]
