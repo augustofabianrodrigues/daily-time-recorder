@@ -7,3 +7,11 @@
     </v-slide-y-transition>
   </v-container>
 </template>
+<script>
+export default {
+  name: 'Dashboard',
+  created () {
+    document.title = this.$i18n.t('title.dashboard')
+  }
+}
+</script>

@@ -34,7 +34,9 @@
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-toolbar-title v-text="$t('toolbar.app')"></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <logged-user-button/>
     </v-toolbar>
     <v-content>
       <router-view/>
@@ -43,6 +45,8 @@
 </template>
 
 <script>
+import LoggedUserButton from '@/components/LoggedUserButton'
+
 export default {
   name: 'Main',
   data () {
@@ -51,14 +55,16 @@ export default {
       drawer: true,
       items: [{
         icon: 'fas fa-desktop',
-        title: 'Dashboard',
+        title: this.$i18n.t('menu.dashboard'),
         href: '/'
       }],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
-      title: 'Registrador de horas'
+      rightDrawer: false
     }
+  },
+  components: {
+    LoggedUserButton
   }
 }
 </script>
